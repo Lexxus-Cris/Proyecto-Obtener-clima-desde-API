@@ -1,6 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react';
+
 import Header from './components/Header';
 import Form from './components/Form';
+import Clima from './components/Clima';
 
 function App() {
 
@@ -10,6 +12,8 @@ function App() {
   });
 
   const [consultar, setConsultar] = useState(false)
+
+  const [results, setResults] = useState({})
 
   const { city, country } = info;
 
@@ -22,7 +26,8 @@ function App() {
         let response = await fetch(API);
         let data = await response.json();
 
-        console.log(data);
+        setResults(data);
+        setConsultar(false);
       }
       consultarApi()
     }
@@ -45,7 +50,11 @@ function App() {
                 setConsultar={setConsultar}
               />
             </div>
-            <div className="col m6 s12">2</div>
+            <div className="col m6 s12">
+              <Clima
+                results={results}
+              />
+            </div>
           </div>
         </div>
       </div>

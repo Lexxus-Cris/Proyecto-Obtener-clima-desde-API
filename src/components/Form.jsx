@@ -71,7 +71,7 @@ const Form = ({info, setInfo, setConsultar}) => {
          <div className="input-field col s12">
             <button
                type="submit"
-               className="waves-effect waves-light btn-large btn-block yellow accent-4 col s12"
+               className="waves-effect waves-light btn-large btn-block yellow accent-4 black-text col s12"
             >Buscar Clima</button>
          </div>
 
