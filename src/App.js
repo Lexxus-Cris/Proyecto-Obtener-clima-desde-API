@@ -1,8 +1,29 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Header from './components/Header';
 import Form from './components/Form';
 
 function App() {
+
+  const [ info, setInfo] = useState({
+      city: '',
+      country: ''
+  });
+
+  const [consultar, setConsultar] = useState(false)
+
+  const { city, country } = info;
+
+  // Usamos useEffect cuando hagamos una consulta a la API
+  useEffect(() => {
+    const API_KEY = '1f6a8977cbd2b67fa522d3d4f647e15f'
+    const API = `http://api.openweathermap.org/data/2,5/weather?q=${ city },${country}&appid=${API_KEY}`
+    const consultarApi = async () => {
+      let response = await fetch(API);
+      let data = response.json()
+    }
+  }, [consultar])
+
+
   return (
     <Fragment>
       <Header 
@@ -13,7 +34,11 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col m6 s12">
-              <Form />
+              <Form 
+                info={info}
+                setInfo={setInfo}
+                setConsultar={setConsultar}
+              />
             </div>
             <div className="col m6 s12">2</div>
           </div>

@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
 
-const Form = () => {
+const Form = ({info, setInfo, setConsultar}) => {
    
-   const [ info, setInfo] = useState({
-      city: '',
-      country: ''
-   });
-
+   
    const [ error, setError ] = useState(false)
 
    // extraer ciudad y pais del state
@@ -33,6 +29,7 @@ const Form = () => {
 
       setError(false)
       // Enviar info al componente principal
+      setConsultar(true)
 
    }
 
@@ -41,7 +38,7 @@ const Form = () => {
       <form
          onSubmit={handleSubmit}
       >
-         {error ? <p className="red darken-4">Todos los campos son obligatorios</p> : null}
+         {error ? <p className="red darken-4 error">Todos los campos son obligatorios</p> : null}
          <div className="input-field col s12">
             <input
                type="text"
@@ -71,6 +68,13 @@ const Form = () => {
             </select>
             <label htmlFor="country">País</label>
          </div>
+         <div className="input-field col s12">
+            <button
+               type="submit"
+               className="waves-effect waves-light btn-large btn-block yellow accent-4 col s12"
+            >Buscar Clima</button>
+         </div>
+
       </form>
    )
 }
