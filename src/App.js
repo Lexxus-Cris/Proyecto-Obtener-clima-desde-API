@@ -3,16 +3,22 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Header from './components/Header';
 import Form from './components/Form';
 import Clima from './components/Clima';
+import Error from './components/Error';
 
 function App() {
 
+  // State que almacena la informacion ingresada por el usuario
   const [ info, setInfo] = useState({
       city: '',
       country: ''
   });
 
-  const [consultar, setConsultar] = useState(false)
+  // State para manejar errores
+  const [error, setError] = useState(false)
 
+  // State que controla cuando se realiza una consulta
+  const [consultar, setConsultar] = useState(false)
+  // State en donde se almacenan los datos de la peticion a la API
   const [results, setResults] = useState({})
 
   const { city, country } = info;
@@ -28,11 +34,25 @@ function App() {
 
         setResults(data);
         setConsultar(false);
+        
+        if (results.cod === "404") {
+          setError(true);
+        }else{
+          setError(false)
+        }
       }
       consultarApi()
     }
   }, [consultar])
 
+  let componente;
+  if (error) {
+    componente = <Error mensaje="No hay resultados" />
+  } else {
+    componente = <Clima
+      results={results}
+    />
+  }
 
   return (
     <Fragment>
@@ -51,9 +71,7 @@ function App() {
               />
             </div>
             <div className="col m6 s12">
-              <Clima
-                results={results}
-              />
+              {componente}
             </div>
           </div>
         </div>
