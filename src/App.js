@@ -9,8 +9,8 @@ function App() {
 
   // State que almacena la informacion ingresada por el usuario
   const [ info, setInfo] = useState({
-      city: '',
-      country: ''
+    city: '',
+    country: ''
   });
 
   // State para manejar errores
@@ -21,31 +21,32 @@ function App() {
   // State en donde se almacenan los datos de la peticion a la API
   const [results, setResults] = useState({})
 
-  const { city, country } = info;
-
+  
   // Usamos useEffect cuando hagamos una consulta a la API
   useEffect(() => {
+    const { city, country } = info;
       if (consultar) {
-        const API_KEY = '1f6a8977cbd2b67fa522d3d4f647e15f'
-        const API = `http://api.openweathermap.org/data/2.5/weather?q=${ city },${country}&appid=${API_KEY}`;
+        const API_KEY = '1f6a8977cbd2b67fa522d3d4f647e15f';
+        const API = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`;
 
         const consultarApi = async () => {
-        let response = await fetch(API);
-        let data = await response.json();
 
-        setResults(data);
-        setConsultar(false);
-        
-        if (results.cod === "404") {
-          setError(true);
-        }else{
-          setError(false)
-        }
+          let response = await fetch(API);
+          let data = await response.json();
+
+          setResults(data);
+          setConsultar(false);
+
+          if (results.cod === "404") {
+            setError(true);
+          }else{
+            setError(false)
+          }
       }
       consultarApi();
       // eslint-disable-next-line 
     }
-  }, [consultar])
+  }, [consultar]);
 
   let componente;
   if (error) {
