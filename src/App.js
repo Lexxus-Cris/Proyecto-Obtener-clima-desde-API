@@ -21,10 +21,10 @@ function App() {
   // State en donde se almacenan los datos de la peticion a la API
   const [results, setResults] = useState({})
 
+  const { city, country } = info;
   
   // Usamos useEffect cuando hagamos una consulta a la API
   useEffect(() => {
-    const { city, country } = info;
       if (consultar) {
         const API_KEY = '1f6a8977cbd2b67fa522d3d4f647e15f';
         const API = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`;
@@ -46,7 +46,7 @@ function App() {
       consultarApi();
       // eslint-disable-next-line 
     }
-  }, [consultar]);
+  }, [consultar, info, results, city, country]);
 
   let componente;
   if (error) {
