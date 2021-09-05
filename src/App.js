@@ -27,7 +27,8 @@ function App() {
   useEffect(() => {
       if (consultar) {
         const API_KEY = '1f6a8977cbd2b67fa522d3d4f647e15f'
-        const API = `http://api.openweathermap.org/data/2.5/weather?q=${ city },${country}&appid=${API_KEY}`
+        const API = `http://api.openweathermap.org/data/2.5/weather?q=${ city },${country}&appid=${API_KEY}`;
+
         const consultarApi = async () => {
         let response = await fetch(API);
         let data = await response.json();
@@ -41,7 +42,8 @@ function App() {
           setError(false)
         }
       }
-      consultarApi()
+      consultarApi();
+      // eslint-disable-next-line 
     }
   }, [consultar])
 

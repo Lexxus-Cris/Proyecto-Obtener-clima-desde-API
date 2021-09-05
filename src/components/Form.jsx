@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Error from './Error';
 
+import PropTypes from 'prop-types';
+
 const Form = ({info, setInfo, setConsultar}) => {
    
    
@@ -78,6 +80,12 @@ const Form = ({info, setInfo, setConsultar}) => {
 
       </form>
    )
+}
+
+Form.protoTypes = {
+   info: PropTypes.object.isRequired,
+   setInfo : PropTypes.func.isRequired,
+   setConsultar : PropTypes.func.isRequired
 }
 
 export default Form
